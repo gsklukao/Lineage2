@@ -24,7 +24,6 @@ function init() {
     renderDownloads(config.downloads);
     startCountdown(config.launchAt);
 
-    setupParallax();
     setupScrollWatch();
     createParticles();
 
@@ -196,21 +195,6 @@ function setupScrollWatch() {
             state.isHeaderVisible = threshold;
             header.classList.toggle('-translate-y-full', !threshold);
         }
-    }, { passive: true });
-}
-
-function setupParallax() {
-    const bg = document.getElementById('hero-bg');
-    if (!bg) return;
-
-    window.addEventListener('mousemove', (e) => {
-        if (state.parallaxRAF) cancelAnimationFrame(state.parallaxRAF);
-
-        state.parallaxRAF = requestAnimationFrame(() => {
-            const moveX = (e.clientX - window.innerWidth / 2) / 120;
-            const moveY = (e.clientY - window.innerHeight / 2) / 120;
-            bg.style.transform = `scale(1.02) translate3d(${-moveX}px, ${-moveY}px, 0)`;
-        });
     }, { passive: true });
 }
 
