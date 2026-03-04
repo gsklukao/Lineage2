@@ -140,6 +140,9 @@
 
         #hero-bg {
             will-change: transform;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+            image-rendering: high-quality;
         }
 
         .l2-card-frame {
@@ -154,7 +157,7 @@
     <div id="particles-container" class="fixed inset-0 pointer-events-none z-[59]"></div>
 
     <!-- Overlay de Granulado -->
-    <div class="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('assets/texture.png')]"></div>
+    <div class="fixed inset-0 opacity-[0.01] pointer-events-none z-50 bg-[url('assets/texture.png')]"></div>
 
     <!-- Sticky Header -->
     <nav id="sticky-header"

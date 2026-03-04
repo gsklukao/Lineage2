@@ -207,9 +207,9 @@ function setupParallax() {
         if (state.parallaxRAF) cancelAnimationFrame(state.parallaxRAF);
 
         state.parallaxRAF = requestAnimationFrame(() => {
-            const moveX = (e.clientX - window.innerWidth / 2) / 80;
-            const moveY = (e.clientY - window.innerHeight / 2) / 80;
-            bg.style.transform = `scale(1.05) translate(${-moveX}px, ${-moveY}px)`;
+            const moveX = (e.clientX - window.innerWidth / 2) / 120;
+            const moveY = (e.clientY - window.innerHeight / 2) / 120;
+            bg.style.transform = `scale(1.02) translate3d(${-moveX}px, ${-moveY}px, 0)`;
         });
     }, { passive: true });
 }
