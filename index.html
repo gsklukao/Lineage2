@@ -25,8 +25,8 @@
                             light: '#ffcc33',
                             dark: '#aa8a2e',
                         },
-                        l2blue: '#0a1628',
-                        l2dark: '#050a14',
+                        l2blue: '#0f172a',
+                        l2dark: '#0a121e',
                     },
                     fontFamily: {
                         fantasy: ['Cinzel', 'serif'],
@@ -84,21 +84,45 @@
             }
             .medieval-divider::before, .medieval-divider::after {
                 content: '';
-                height: 1px;
+                height: 2px;
                 flex-grow: 1;
                 background: linear-gradient(90deg, transparent, #d4af37, transparent);
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
             }
         }
         
         body {
-            background-color: #020202;
+            background-color: #0a121e;
             background-image: url('assets/parchment.png');
             background-attachment: fixed;
-            background-blend-mode: overlay;
+            background-blend-mode: soft-light;
             color: #e5e7eb;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             cursor: url('cursor/Lineage 2 original.cur'), auto !important;
+        }
+
+        /* Luzes Ambientais (Bloom) */
+        .ambient-light-1 {
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            position: absolute;
+            width: 150vw;
+            height: 150vh;
+            top: -25vh;
+            left: -25vw;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ambient-light-2 {
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            bottom: -20vh;
+            right: -20vw;
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Iluminação MMORPG */
@@ -204,12 +228,18 @@
     <div class="fixed inset-0 pointer-events-none z-[60] vignette"></div>
     <div id="particles-container" class="fixed inset-0 pointer-events-none z-[59]"></div>
 
+    <!-- Luzes Ambiente Globais -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="ambient-light-1"></div>
+        <div class="ambient-light-2"></div>
+    </div>
+
     <!-- Overlay de Granulado -->
-    <div class="fixed inset-0 opacity-[0.01] pointer-events-none z-50 bg-[url('assets/texture.png')]"></div>
+    <div class="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('assets/texture.png')]"></div>
 
     <!-- Header Fixo -->
     <nav id="main-nav"
-        class="fixed top-0 left-0 w-full z-[100] bg-black/80 backdrop-blur-lg border-b border-gold/20 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
+        class="fixed top-0 left-0 w-full z-[100] bg-black/60 backdrop-blur-lg border-b border-gold/30 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300 shadow-[0_4px_30px_rgba(212,175,55,0.15)]">
         <div class="font-fantasy text-gold text-xl md:text-2xl font-black tracking-widest leading-none">
             L2 DEGENERATION
         </div>
