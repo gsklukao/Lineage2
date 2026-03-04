@@ -39,7 +39,7 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .text-glow {
-                text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+                text-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(212, 175, 55, 0.4);
             }
             .glass {
                 background: rgba(255, 255, 255, 0.05);
@@ -170,8 +170,9 @@
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
-        <div id="hero-bg" class="absolute inset-0 z-0 bg-cover bg-top"
+        <div id="hero-bg" class="absolute inset-0 z-0 bg-cover bg-[center_35%]"
             style="background-image: url('assets/hero_vibrant.png');">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-transparent"></div>
             <div class="absolute inset-0 bg-black/10"></div>
             <div class="god-rays"></div>
