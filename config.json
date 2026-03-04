@@ -1,0 +1,37 @@
+{
+  "serverName": "L2 Interlude — Degeneration",
+  "chronicle": "Interlude (C6)",
+  "launchAt": "2026-03-20T20:00:00-03:00",
+  "version": "1.0.0",
+  "updatedAt": "2026-03-03T20:00:00-03:00",
+  "links": {
+    "register": "https://example.com/register",
+    "download": "https://example.com/download",
+    "discord": "https://discord.gg/example"
+  },
+  "social": [
+    { "name": "Discord", "url": "https://discord.gg/example", "icon": "discord" },
+    { "name": "Instagram", "url": "https://instagram.com/example", "icon": "instagram" },
+    { "name": "Facebook", "url": "https://facebook.com/example", "icon": "facebook" }
+  ],
+  "features": [
+    { "title": "Experience", "value": "x50" },
+    { "title": "Skill Points", "value": "x50" },
+    { "title": "Adena", "value": "x100" },
+    { "title": "Drop Rate", "value": "x10" },
+    { "title": "Spoil Rate", "value": "x10" },
+    { "title": "Safe Enchant", "value": "+3" }
+  ],
+  "bosses": [
+    {
+      "name": "Baium",
+      "image": "./assets/baium.png",
+      "tagline": "O Imperador Celestial selado na Tower of Insolence."
+    },
+    {
+      "name": "Valakas",
+      "image": "./assets/valakas.png",
+      "tagline": "O Dragão do Fogo que habita as profundezas de Goddard."
+    }
+  ]
+}

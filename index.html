@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineage ][ - DEGENERATION | Pré-Inauguração Interlude</title>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#d4af37',
+                            light: '#ffcc33',
+                            dark: '#aa8a2e',
+                        },
+                        l2blue: '#0a0e14',
+                        l2dark: '#020202',
+                    },
+                    fontFamily: {
+                        fantasy: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-glow {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
+            .glass {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .gold-gradient {
+                background: linear-gradient(to bottom, #ffffff 0%, #d4af37 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .btn-epic {
+                @apply relative overflow-hidden transition-all duration-300 transform active:scale-95;
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+            }
+            .btn-epic:hover {
+                box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+                @apply -translate-y-1;
+            }
+        }
+        
+        body {
+            background-color: #05070a;
+            background-image: url('assets/parchment.png');
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: url('cursor/Lineage 2 original.cur'), auto !important;
+        }
+
+        /* Iluminação MMORPG */
+        .god-rays {
+            background: radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .l2-card-frame {
+            position: relative;
+            background: rgba(10, 15, 25, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .l2-card-frame::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            pointer-events: none;
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Seção de Título Ornamental */
+        .medieval-title {
+            position: relative;
+            display: inline-block;
+            padding: 0 60px;
+        }
+
+        .medieval-title::before, .medieval-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+        }
+
+        .medieval-title::before { left: 0; }
+        .medieval-title::after { right: 0; }
+
+        /* Partículas Flutuantes Visual */
+        @keyframes float-dust {
+            0% { transform: translateY(10px) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .particle {
+            position: absolute;
+            background: #d4af37;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-dust var(--dur) linear infinite;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Atmosfera Cinematográfica -->
+    <div class="fixed inset-0 pointer-events-none z-[60] vignette"></div>
+    <div id="particles-container" class="fixed inset-0 pointer-events-none z-[59]"></div>
+
+    <!-- Overlay de Granulado -->
+    <div class="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('assets/texture.png')]"></div>
+
+    <!-- Sticky Header -->
+    <nav id="sticky-header"
+        class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-2xl border-b border-gold/10 transform -translate-y-full transition-transform duration-500 py-4 px-12 flex justify-between items-center">
+        <div class="font-fantasy text-gold text-2xl font-black tracking-widest">Lineage ][ - DEGENERATION</div>
+        <div id="mini-countdown" class="flex gap-6 items-center"></div>
+        <a href="#discord"
+            class="btn-epic bg-gold text-black px-8 py-2 font-fantasy font-black text-xs shadow-lg">DISCORD</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
+        <div id="hero-bg" class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-1000 scale-110"
+            style="background-image: url('assets/hero_elite.png');">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-l2blue/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="god-rays"></div>
+        </div>
+
+        <div
+            class="container mx-auto relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left pt-20">
+            <div class="animate-fade-in-down mb-6">
+                <span
+                    class="inline-block px-4 py-1 mb-8 text-xs font-bold tracking-[0.4em] text-gold uppercase border-l-2 border-gold bg-gold/5 backdrop-blur-sm">
+                    Inauguração em Breve
+                </span>
+                <h1 class="font-fantasy gold-gradient text-7xl md:text-[9rem] lg:text-[11rem] font-black mb-4 leading-none text-glow tracking-tighter"
+                    id="server-name">
+                    Lineage ][ - DEGENERATION
+                </h1>
+                <p class="text-gold/80 text-xl md:text-3xl lg:text-4xl font-fantasy tracking-[0.5em] mb-16 uppercase"
+                    id="chronicle">
+                    The Ultimate Interlude
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full max-w-5xl mb-20" id="countdown"></div>
+
+            <div class="flex flex-wrap gap-8 justify-center lg:justify-start">
+                <a href="#register" id="link-register"
+                    class="btn-epic px-20 py-6 bg-gold text-black font-fantasy font-black text-2xl tracking-widest shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    PRÉ-REGISTRO
+                </a>
+                <a href="#discord" id="discord-hero"
+                    class="btn-epic px-20 py-6 border-2 border-gold/30 text-gold font-fantasy font-black text-2xl tracking-widest backdrop-blur-xl">
+                    DISCORD
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-30">
+            <span class="text-[9px] font-fantasy text-gold tracking-[0.5em] uppercase">Informações do Server</span>
+            <div class="w-[1px] h-16 bg-gradient-to-b from-gold to-transparent"></div>
+        </div>
+    </header>
+
+    <main class="relative z-20 bg-l2dark">
+        <div class="h-1 bg-gradient-to-r from-transparent via-gold/20 to-transparent w-full"></div>
+
+        <section class="py-40 container mx-auto px-6 relative">
+            <div class="text-center mb-32 z-10 relative">
+                <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient uppercase tracking-tight medieval-title">
+                    Rates & Infos</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-10 relative z-10" id="features-grid"></div>
+        </section>
+
+        <section class="py-40 bg-black/30 border-y border-gold/5">
+            <div class="container mx-auto px-6 relative overflow-hidden glass p-12 md:p-24">
+                <div class="grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                    <div>
+                        <h3 class="font-fantasy text-5xl md:text-6xl text-gold mb-8 leading-tight" id="event-title">
+                            EVENTO DE ABERTURA</h3>
+                        <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-12" id="event-desc"></p>
+                        <ul class="space-y-6" id="event-highlights"></ul>
+                    </div>
+                    <div class="relative group">
+                        <img src="assets/valakas.png" alt="Valakas"
+                            class="w-full filter saturate-0 opacity-20 hover:saturate-100 hover:opacity-100 transition-all duration-1000">
+                        <div class="absolute inset-0 bg-gradient-to-t from-l2dark to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comunidade Section -->
+        <section class="py-40 px-6">
+            <div class="container mx-auto glass p-20 text-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <h2 class="font-fantasy text-5xl md:text-6xl text-white mb-8 text-glow">JOIN THE BATTLE</h2>
+                <a href="#" id="discord-link"
+                    class="btn-epic inline-block px-16 py-6 bg-[#5865F2] text-white font-fantasy font-black text-2xl tracking-widest shadow-[0_0_30px_rgba(88,101,242,0.3)] hover:shadow-[0_0_60px_rgba(88,101,242,0.6)]">
+                    ENTRAR NO DISCORD
+                </a>
+            </div>
+        </section>
+
+        <section id="download" class="py-40 container mx-auto px-6 text-center relative overflow-hidden">
+            <div class="absolute -right-40 top-0 w-1/3 h-full opacity-10 pointer-events-none">
+                <img src="assets/baium.png" alt="Baium Decor"
+                    class="w-full h-full object-contain filter grayscale scale-150">
+            </div>
+
+            <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient mb-32 uppercase tracking-tight medieval-title">
+                Downloads</h2>
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto relative z-10" id="downloads-grid"></div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-24 border-t border-gold/10 text-center">
+        <div class="container mx-auto px-6">
+            <div class="font-fantasy text-gold text-3xl mb-12 tracking-tighter opacity-70">L2 DEGENERATION</div>
+            <p class="text-gray-700 text-xs font-fantasy tracking-[0.3em]" id="footer-credits"></p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
