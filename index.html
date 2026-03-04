@@ -39,36 +39,63 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .text-glow {
-                text-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(212, 175, 55, 0.4);
+                text-shadow: 0 0 40px rgba(0, 0, 0, 0.9), 0 0 15px rgba(212, 175, 55, 0.4);
             }
             .glass {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(212, 175, 55, 0.15);
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             }
-            .gold-gradient {
-                background: linear-gradient(to bottom, #ffffff 0%, #d4af37 100%);
+            .gold-gradient-text {
+                background: linear-gradient(180deg, #FFFFFF 0%, #D4AF37 45%, #AA8A2E 100%);
                 -webkit-background-clip: text;
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
             }
             .btn-epic {
-                @apply relative overflow-hidden transition-all duration-300 transform active:scale-95;
-                box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
-                will-change: transform, box-shadow;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(180deg, #D4AF37 0%, #AA8A2E 100%);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+                border: 1px solid #7D6421;
+            }
+            .btn-epic:active {
+                transform: scale(0.95);
             }
             .btn-epic:hover {
-                box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
-                @apply -translate-y-1;
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+                filter: brightness(1.1);
+                transform: translateY(-2px);
+            }
+            .medieval-divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                width: 100%;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            .medieval-divider::before, .medieval-divider::after {
+                content: '';
+                height: 1px;
+                flex-grow: 1;
+                background: linear-gradient(90deg, transparent, #d4af37, transparent);
             }
         }
         
         body {
-            background-color: #05070a;
+            background-color: #020202;
             background-image: url('assets/parchment.png');
             background-attachment: fixed;
             background-blend-mode: overlay;
-            color: #d1d5db;
+            color: #e5e7eb;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             cursor: url('cursor/Lineage 2 original.cur'), auto !important;
@@ -160,6 +187,15 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Cursor Customizado interativo */
+        a, button, .cursor-pointer {
+            cursor: url('cursor/Lineage 2 original.cur'), pointer !important;
+        }
+        
+        body {
+            cursor: url('cursor/Lineage 2 original.cur'), auto !important;
+        }
     </style>
 </head>
 
@@ -171,13 +207,29 @@
     <!-- Overlay de Granulado -->
     <div class="fixed inset-0 opacity-[0.01] pointer-events-none z-50 bg-[url('assets/texture.png')]"></div>
 
-    <!-- Sticky Header -->
-    <nav id="sticky-header"
-        class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-2xl border-b border-gold/10 transform -translate-y-full transition-transform duration-500 py-4 px-12 flex justify-between items-center">
-        <div class="font-fantasy text-gold text-2xl font-black tracking-widest">Lineage ][ - DEGENERATION</div>
-        <div id="mini-countdown" class="flex gap-6 items-center"></div>
-        <a href="#discord"
-            class="btn-epic bg-gold text-black px-8 py-2 font-fantasy font-black text-xs shadow-lg">DISCORD</a>
+    <!-- Header Fixo -->
+    <nav id="main-nav"
+        class="fixed top-0 left-0 w-full z-[100] bg-black/80 backdrop-blur-lg border-b border-gold/20 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
+        <div class="font-fantasy text-gold text-xl md:text-2xl font-black tracking-widest leading-none">
+            L2 DEGENERATION
+        </div>
+
+        <div
+            class="hidden lg:flex gap-8 items-center font-fantasy text-[10px] font-bold tracking-[0.3em] text-white/70">
+            <a href="#" class="hover:text-gold transition-colors">INÍCIO</a>
+            <a href="#features" class="hover:text-gold transition-colors">INFORMAÇÕES</a>
+            <a href="#download" class="hover:text-gold transition-colors">DOWNLOAD</a>
+            <a href="https://discord.gg/l2degeneration" target="_blank"
+                class="hover:text-gold transition-colors uppercase">Discord</a>
+        </div>
+
+        <div class="flex gap-4 items-center">
+            <div id="mini-countdown"
+                class="hidden md:flex gap-4 items-center bg-black/40 px-4 py-2 rounded border border-white/5"></div>
+            <a href="#register"
+                class="btn-epic px-6 py-2 font-fantasy font-black text-xs tracking-widest text-black shadow-lg">JOGAR
+                AGORA</a>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -190,71 +242,105 @@
             <div class="god-rays"></div>
         </div>
 
-        <div
-            class="container mx-auto relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left pt-20">
-            <div class="animate-fade-in-down mb-6">
+        <div class="container mx-auto relative z-20 flex flex-col items-center text-center pt-32 pb-20">
+            <div class="reveal-element mb-12">
                 <span
-                    class="inline-block px-4 py-1 mb-8 text-xs font-bold tracking-[0.4em] text-gold uppercase border-l-2 border-gold bg-gold/5 backdrop-blur-sm">
-                    Inauguração em Breve
+                    class="inline-block px-6 py-2 mb-8 text-[10px] font-bold tracking-[0.5em] text-gold uppercase border border-gold/30 bg-gold/5 backdrop-blur-md rounded-full">
+                    A Lenda Retorna em Breve
                 </span>
-                <h1 class="font-fantasy gold-gradient text-7xl md:text-[9rem] lg:text-[11rem] font-black mb-4 leading-none text-glow tracking-tighter"
+                <h1 class="font-fantasy gold-gradient-text text-7xl md:text-[10rem] lg:text-[13rem] font-black mb-6 leading-[0.85] tracking-tighter drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
                     id="server-name">
-                    Lineage ][ - DEGENERATION
+                    L2 DEGENERATION
                 </h1>
-                <p class="text-gold/80 text-xl md:text-3xl lg:text-4xl font-fantasy tracking-[0.5em] mb-4 uppercase"
+                <p class="text-gold/90 text-2xl md:text-4xl lg:text-5xl font-fantasy tracking-[0.6em] mb-8 uppercase drop-shadow-md"
                     id="chronicle">
                     The Ultimate Interlude
                 </p>
-                <p class="text-gray-400 text-sm md:text-base font-light max-w-2xl mx-auto lg:mx-0 mb-16 tracking-wide">
-                    Sem itens Pay-to-Win, economia hardcore estável e infraestrutura de baixa latência corporativa.
-                    Prepare-se para a verdadeira guerra.
+                <p
+                    class="text-gray-300 text-base md:text-lg font-light max-w-3xl mx-auto mb-16 tracking-wide leading-relaxed drop-shadow-sm">
+                    Experimente o Lineage II em sua forma mais pura. Sem facilitadores, sem atalhos.
+                    Apenas você, seu clã e a glória de Elmoreden.
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full max-w-5xl mb-20" id="countdown"></div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full max-w-6xl mb-24 px-4" id="countdown">
+            </div>
 
-            <div class="flex flex-wrap gap-6 justify-center lg:justify-start">
+            <div class="flex flex-wrap gap-8 justify-center items-center reveal-element">
                 <a href="#register" id="link-register"
-                    class="btn-epic px-20 py-6 bg-gold text-black font-fantasy font-black text-2xl tracking-widest shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:shadow-[0_0_50px_rgba(212,175,55,1)] hover:scale-105 active:scale-95 transition-all">
-                    PRÉ-REGISTRO
+                    class="btn-epic px-24 py-7 text-black font-fantasy font-black text-2xl tracking-[0.2em] shadow-[0_15px_40px_rgba(0,0,0,0.4)] hover:scale-105 active:scale-95 transition-all">
+                    INICIAR JORNADA
                 </a>
-                <a href="#discord" id="discord-hero"
-                    class="btn-epic px-20 py-6 border border-gold/30 text-gold/70 hover:text-gold font-fantasy font-black text-2xl tracking-widest backdrop-blur-xl hover:bg-gold/10 transition-all">
+                <a href="https://discord.gg/l2degeneration" id="discord-hero" target="_blank"
+                    class="px-24 py-7 border-2 border-gold/40 text-gold/80 hover:text-white hover:border-gold hover:bg-gold/10 font-fantasy font-black text-2xl tracking-[0.2em] backdrop-blur-xl transition-all rounded-sm flex items-center justify-center">
                     DISCORD
                 </a>
             </div>
         </div>
 
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-30">
-            <span class="text-[9px] font-fantasy text-gold tracking-[0.5em] uppercase">Informações do Server</span>
-            <div class="w-[1px] h-16 bg-gradient-to-b from-gold to-transparent"></div>
+        <div
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-50 animate-bounce cursor-pointer">
+            <span class="text-[10px] font-fantasy text-gold tracking-[0.4em] uppercase">Scroll para Explorar</span>
+            <i data-lucide="chevron-down" class="text-gold w-5 h-5"></i>
         </div>
     </header>
 
-    <main class="relative z-20 bg-l2dark">
-        <!-- Faixa de Sinais de Confiança (Trust Signals) -->
-        <div
-            class="w-full bg-black/90 border-y border-gold/20 py-6 backdrop-blur-md relative z-30 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+    <main class="relative z-20 bg-[#020202]">
+        <!-- Divisor Ornamental -->
+        <div class="medieval-divider">
+            <div class="w-3 h-3 rotate-45 border border-gold bg-black shadow-[0_0_10px_#d4af37]"></div>
+        </div>
+
+        <!-- Section: Informações do Servidor -->
+        <section id="features" class="py-32 container mx-auto px-6 relative">
+            <div class="text-center mb-24 z-10 relative">
+                <span class="text-gold/50 text-[10px] font-bold tracking-[0.6em] uppercase mb-4 block">A Essência do
+                    Jogo</span>
+                <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient-text uppercase tracking-tight">
+                    Informações do Servidor</h2>
+                <div class="w-32 h-[1px] bg-gold/30 mx-auto mt-8"></div>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10" id="features-grid"></div>
+        </section>
+
+        <div class="medieval-divider opacity-30"></div>
+
+        <!-- Faixa de Sinais de Confiança -->
+        <div class="w-full bg-black/40 border-y border-white/5 py-10 backdrop-blur-md relative z-30 shadow-2xl">
             <div
-                class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs md:text-sm font-bold uppercase tracking-widest text-gold/60">
-                <div class="flex flex-col md:flex-row items-center gap-3 justify-center"><i data-lucide="shield-check"
-                        class="text-gold w-6 h-6"></i> <span>Anti-Bot Premium</span></div>
-                <div class="flex flex-col md:flex-row items-center gap-3 justify-center"><i data-lucide="server"
-                        class="text-gold w-6 h-6"></i> <span>DDoS Protection</span></div>
-                <div class="flex flex-col md:flex-row items-center gap-3 justify-center"><i data-lucide="activity"
-                        class="text-gold w-6 h-6"></i> <span>Low Latency Proxy</span></div>
-                <div class="flex flex-col md:flex-row items-center gap-3 justify-center"><i data-lucide="coins"
-                        class="text-gold w-6 h-6"></i> <span>No Pay-to-Win</span></div>
+                class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-gold/60">
+                <div class="flex flex-col items-center gap-4 justify-center group">
+                    <div
+                        class="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center group-hover:border-gold/50 transition-colors">
+                        <i data-lucide="shield-check" class="text-gold w-5 h-5"></i>
+                    </div>
+                    <span>Anti-Bot Premium</span>
+                </div>
+                <div class="flex flex-col items-center gap-4 justify-center group">
+                    <div
+                        class="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center group-hover:border-gold/50 transition-colors">
+                        <i data-lucide="server" class="text-gold w-5 h-5"></i>
+                    </div>
+                    <span>DDoS Protection</span>
+                </div>
+                <div class="flex flex-col items-center gap-4 justify-center group">
+                    <div
+                        class="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center group-hover:border-gold/50 transition-colors">
+                        <i data-lucide="activity" class="text-gold w-5 h-5"></i>
+                    </div>
+                    <span>Low Latency Proxy</span>
+                </div>
+                <div class="flex flex-col items-center gap-4 justify-center group">
+                    <div
+                        class="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center group-hover:border-gold/50 transition-colors">
+                        <i data-lucide="coins" class="text-gold w-5 h-5"></i>
+                    </div>
+                    <span>No Pay-to-Win</span>
+                </div>
             </div>
         </div>
 
-        <div class="h-1 bg-gradient-to-r from-transparent via-gold/20 to-transparent w-full"></div>
-
-        <section class="py-40 container mx-auto px-6 relative">
-            <div class="text-center mb-32 z-10 relative">
-                <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient uppercase tracking-tight medieval-title">
-                    Rates & Infos</h2>
-            </div>
+        <section class="py-24 container mx-auto px-6 hidden">
             <div class="grid grid-cols-2 md:grid-cols-3 gap-10 relative z-10" id="features-grid"></div>
         </section>
 
@@ -277,26 +363,46 @@
         </section>
 
         <!-- Comunidade Section -->
-        <section class="py-40 px-6">
-            <div class="container mx-auto glass p-20 text-center relative overflow-hidden group reveal-element">
+        <section class="py-32 px-6">
+            <div class="container mx-auto glass p-12 md:p-24 text-center relative overflow-hidden group reveal-element">
                 <div class="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h2 class="font-fantasy text-5xl md:text-6xl text-white mb-8 text-glow">JOIN THE BATTLE</h2>
-                <a href="#" id="discord-link"
-                    class="btn-epic inline-block px-16 py-6 bg-[#5865F2] text-white font-fantasy font-black text-2xl tracking-widest shadow-[0_0_30px_rgba(88,101,242,0.3)] hover:shadow-[0_0_60px_rgba(88,101,242,0.6)]">
-                    ENTRAR NO DISCORD
-                </a>
+                <div class="relative z-10">
+                    <span class="text-gold text-xs font-bold tracking-[0.5em] uppercase mb-6 block">Junte-se a Centenas
+                        de Jogadores</span>
+                    <h2 class="font-fantasy text-5xl md:text-7xl text-white mb-12 text-glow">NOSSA COMUNIDADE</h2>
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-12 mb-16">
+                        <div class="text-center">
+                            <div class="text-4xl font-fantasy text-gold mb-2">1.2k+</div>
+                            <div class="text-[9px] text-gray-500 uppercase tracking-widest">Membros no Discord</div>
+                        </div>
+                        <div class="w-[1px] h-12 bg-white/10 hidden md:block"></div>
+                        <div class="text-center">
+                            <div class="text-4xl font-fantasy text-green-500 mb-2">450+</div>
+                            <div class="text-[9px] text-gray-500 uppercase tracking-widest">Players Online Agora</div>
+                        </div>
+                    </div>
+                    <a href="https://discord.gg/l2degeneration" target="_blank"
+                        class="btn-epic inline-flex items-center gap-4 px-16 py-7 bg-[#5865F2] text-white font-fantasy font-black text-2xl tracking-widest shadow-[0_20px_50px_rgba(88,101,242,0.3)] hover:shadow-[0_25px_60px_rgba(88,101,242,0.5)] border-none">
+                        <i data-lucide="message-square" class="w-8 h-8"></i>
+                        ENTRAR NO DISCORD
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="download" class="py-40 container mx-auto px-6 text-center relative overflow-hidden">
+        <section id="download" class="py-32 container mx-auto px-6 text-center relative overflow-hidden">
             <div class="absolute -right-40 top-0 w-1/3 h-full opacity-10 pointer-events-none">
                 <img src="assets/baium.png" alt="Epic Boss Baium" loading="lazy"
                     class="w-full h-full object-contain filter grayscale scale-150">
             </div>
 
-            <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient mb-32 uppercase tracking-tight medieval-title">
+            <div class="medieval-divider mb-16">
+                <div class="w-3 h-3 rotate-45 border border-gold bg-black shadow-[0_0_10px_#d4af37]"></div>
+            </div>
+
+            <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient-text mb-24 uppercase tracking-tight">
                 Downloads</h2>
-            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto relative z-10" id="downloads-grid"></div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-10" id="downloads-grid"></div>
         </section>
     </main>
 
