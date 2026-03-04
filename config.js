@@ -13,7 +13,9 @@ const SERVER_CONFIG = {
         { title: "Drop/Spoil", value: "1x", icon: "package" },
         { title: "Safe Enchant", value: "+3", icon: "shield-check" },
         { title: "Max Enchant", value: "+16", icon: "flame" },
-        { title: "Gameplay", value: "Focus", icon: "swords" }
+        { title: "Gameplay", value: "Focus", icon: "swords" },
+        { title: "Quest Rate", value: "5x", icon: "scroll" },
+        { title: "Buff Slots", value: "24+4", icon: "clock" }
     ],
     // Informações de Pré-Inauguração
     preInauguration: {
