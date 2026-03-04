@@ -27,6 +27,9 @@ function init() {
     setupScrollWatch();
     createParticles();
 
+    // Configura o observador de animações após a DOM ser construída (mesmo assíncrona/dinâmica)
+    setTimeout(setupScrollReveal, 100);
+
     if (window.lucide) lucide.createIcons();
 }
 
@@ -80,8 +83,8 @@ function renderFeatures(features = []) {
     const grid = document.getElementById('features-grid');
     if (!grid) return;
 
-    grid.innerHTML = features.map(f => `
-        <div class="l2-card-frame p-12 text-center group transition-all duration-500 hover:-translate-y-2 relative overflow-hidden border-gold/20 hover:border-gold/50 shadow-2xl">
+    grid.innerHTML = features.map((f, index) => `
+        <div class="reveal-element l2-card-frame p-12 text-center group transition-all duration-500 hover:-translate-y-2 relative overflow-hidden border-gold/20 hover:border-gold/50 shadow-2xl" style="transition-delay: ${index * 100}ms;">
             <div class="absolute -inset-1 bg-gradient-to-r from-transparent via-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur"></div>
             <div class="absolute top-4 right-4 text-gold/10 group-hover:text-gold/40 transition-all duration-700">
                 <i data-lucide="${f.icon || 'star'}" class="w-16 h-16 transform group-hover:rotate-12"></i>
@@ -117,8 +120,8 @@ function renderDownloads(downloads = []) {
     const grid = document.getElementById('downloads-grid');
     if (!grid) return;
 
-    grid.innerHTML = downloads.map(d => `
-        <div class="l2-card-frame p-12 flex flex-col items-center text-center group transition-all duration-500 hover:border-gold/40">
+    grid.innerHTML = downloads.map((d, index) => `
+        <div class="reveal-element l2-card-frame p-12 flex flex-col items-center text-center group transition-all duration-500 hover:border-gold/40" style="transition-delay: ${index * 150}ms;">
             <div class="w-24 h-24 bg-gold/5 border border-gold/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-all duration-500 text-gold shadow-[0_0_20px_rgba(212,175,55,0.05)]">
                 <i data-lucide="${d.icon || 'download'}" class="w-12 h-12"></i>
             </div>
@@ -196,6 +199,19 @@ function setupScrollWatch() {
             header.classList.toggle('-translate-y-full', !threshold);
         }
     }, { passive: true });
+}
+
+function setupScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                observer.unobserve(entry.target); // Anima apenas uma vez
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal-element').forEach(el => observer.observe(el));
 }
 
 // Ignition
