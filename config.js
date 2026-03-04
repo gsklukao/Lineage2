@@ -41,5 +41,36 @@ const SERVER_CONFIG = {
             link: "#",
             icon: "refresh-cw"
         }
+    ],
+    // Seção de Classes/Jogadores
+    classes: [
+        {
+            name: "Human Dreadnought",
+            description: "O mestre das armas de haste, especializado em controle de multidões e dano em área massivo.",
+            color: "#3b82f6", // Azul
+            tag: "Warrior",
+            icon: "sword"
+        },
+        {
+            name: "Elf Mystic Muse",
+            description: "A velocidade personificada. Magias de gelo que congelam o campo de batalha em segundos.",
+            color: "#60a5fa", // Azul claro/Gelo
+            tag: "Mage",
+            icon: "wand-2"
+        },
+        {
+            name: "Orc Titan",
+            description: "Força bruta inigualável. Quanto mais ferido, mais perigoso se torna o Destruidor.",
+            color: "#ef4444", // Vermelho
+            tag: "Warrior",
+            icon: "axe"
+        },
+        {
+            name: "Dark Elf Ghost Sentinel",
+            description: "O silêncio mortal. Flechas críticas que atravessam as sombras antes que o inimigo perceba.",
+            color: "#a855f7", // Roxo
+            tag: "Archer",
+            icon: "target"
+        }
     ]
 };

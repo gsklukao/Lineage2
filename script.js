@@ -20,6 +20,7 @@ function init() {
 
     renderHero(config);
     renderFeatures(config.features);
+    renderClasses(config.classes);
     renderEventInfo(config.preInauguration);
     renderDownloads(config.downloads);
     startCountdown(config.launchAt);
@@ -147,6 +148,25 @@ function renderDownloads(downloads = []) {
     `).join('');
     if (window.lucide) lucide.createIcons();
 }
+
+function renderClasses(classes = []) {
+    const grid = document.getElementById('classes-grid');
+    if (!grid) return;
+
+    grid.innerHTML = classes.map((c, index) => `
+        <div class="reveal-element glass p-8 flex flex-col group transition-all duration-500 hover:border-gold/40 relative" style="transition-delay: ${index * 150}ms;">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-current opacity-0 group-hover:opacity-10 transition-opacity" style="color: ${c.color}"></div>
+            <div class="w-16 h-16 rounded-lg bg-black/40 flex items-center justify-center mb-6 border border-white/5 group-hover:border-gold/30 transition-all" style="color: ${c.color}">
+                <i data-lucide="${c.icon || 'user'}" class="w-8 h-8"></i>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-widest mb-2" style="color: ${c.color}">${c.tag}</span>
+            <h4 class="font-fantasy text-2xl text-white mb-4 uppercase tracking-tighter text-glow group-hover:text-gold transition-colors">${c.name}</h4>
+            <p class="text-gray-400 text-xs leading-relaxed font-light">${c.description}</p>
+        </div>
+    `).join('');
+    if (window.lucide) lucide.createIcons();
+}
+
 
 /**
  * Countdown Engine

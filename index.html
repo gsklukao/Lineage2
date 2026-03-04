@@ -25,8 +25,8 @@
                             light: '#ffcc33',
                             dark: '#aa8a2e',
                         },
-                        l2blue: '#0a0e14',
-                        l2dark: '#020202',
+                        l2blue: '#0a1628',
+                        l2dark: '#050a14',
                     },
                     fontFamily: {
                         fantasy: ['Cinzel', 'serif'],
@@ -103,7 +103,7 @@
 
         /* Iluminação MMORPG */
         .god-rays {
-            background: radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
             position: absolute;
             inset: 0;
             pointer-events: none;
@@ -278,8 +278,10 @@
             </div>
         </div>
 
-        <div class="absolute bottom-12 inset-x-0 flex flex-col items-center gap-5 opacity-80 animate-bounce cursor-pointer z-30 transition-all hover:scale-110 hover:opacity-100">
-            <span class="text-[13px] md:text-[15px] font-fantasy text-gold tracking-[0.7em] uppercase whitespace-nowrap text-glow-sm">
+        <div
+            class="absolute bottom-12 inset-x-0 flex flex-col items-center gap-5 opacity-80 animate-bounce cursor-pointer z-30 transition-all hover:scale-110 hover:opacity-100">
+            <span
+                class="text-[13px] md:text-[15px] font-fantasy text-gold tracking-[0.7em] uppercase whitespace-nowrap text-glow-sm">
                 Scroll para Explorar
             </span>
             <i data-lucide="chevron-down" class="text-gold w-8 h-8 drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]"></i>
@@ -345,6 +347,27 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-10 relative z-10" id="features-grid"></div>
         </section>
 
+        </section>
+
+        <!-- Section: Escolha sua Classe (Players) -->
+        <section id="classes" class="py-32 bg-gradient-to-b from-l2dark to-l2blue relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('assets/pattern.png')] pointer-events-none"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-24">
+                    <span class="text-gold/50 text-[10px] font-bold tracking-[0.6em] uppercase mb-4 block">A Lenda é
+                        Sua</span>
+                    <h2 class="font-fantasy text-6xl md:text-8xl gold-gradient-text uppercase tracking-tight">Escolha
+                        seu Destino</h2>
+                    <p class="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">Domine Elmoreden com classes lendárias, cada
+                        uma com sua própria essência e poder devastador.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" id="classes-grid">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+        </section>
+
         <section class="py-40 bg-black/30 border-y border-gold/5">
             <div class="container mx-auto px-6 relative overflow-hidden glass p-12 md:p-24">
                 <div class="grid lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -362,6 +385,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- Faixa de Sinais de Confiança -->
 
         <!-- Comunidade Section -->
         <section class="py-32 px-6">
